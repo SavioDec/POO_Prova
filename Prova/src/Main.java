@@ -1,13 +1,22 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
+import Sistema.Campeonato;
+import Sistema.Time;
 
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
-    }
+
+
+
+void main() {
+    Campeonato campeonatoProva = new Campeonato();
+
+
+    campeonatoProva.adicionaTime(new Time("Palmeiras"));
+    campeonatoProva.adicionaTime(new Time("Corinthians"));
+    campeonatoProva.adicionaTime(new Time("Santos"));
+    campeonatoProva.adicionaTime(new Time("Vasco"));
+    campeonatoProva.adicionaTime(new Time("Sapucaiba do paraiba"));
+    campeonatoProva.adicionaTime(new Time("Bota fogo"));
+    campeonatoProva.adicionaTime(new Time("Sao paulo"));
+    campeonatoProva.adicionaTime(new Time("Gremio"));
+
 }
+
+
