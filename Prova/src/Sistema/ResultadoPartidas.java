@@ -11,9 +11,9 @@ public class ResultadoPartidas {
 
     public String getVeredito() {
         if (golsMandante > golsVisitante) {
-            return "vitoria mandante!!!";
+            return "vitoria mandante";
         } else if (golsVisitante > golsMandante) {
-            return "vitoria visitante!!!";
+            return "vitoria visitante";
         } else {
             return "empate";
         }
@@ -25,6 +25,4 @@ public class ResultadoPartidas {
     public int getGolsVisitante(){
         return golsVisitante;
     }
-
-
 }
