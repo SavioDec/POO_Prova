@@ -24,5 +24,6 @@ public class ResultadoPartidas {
     }
     public int getGolsVisitante(){
         return golsVisitante;
+
     }
 }
