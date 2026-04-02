@@ -1,57 +1,43 @@
 package Sistema;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Partida {
+    private Time mandante;
+    private Time visitante;
+    private LocalDateTime dataHoraInicio;
+    private int golsMandante;
+    private int golsVisitante;
+    private boolean finalizada;
 
-    private String clubeMandante;
-    private String clubeVisitante;
-    private LocalDateTime dataHorarioJogo;
-
-    public Partida(String clubeMandante, String clubeVisitante, LocalDateTime dataHorarioJogo) {
-        this.clubeMandante = clubeMandante;
-        this.clubeVisitante = clubeVisitante;
-        this.dataHorarioJogo = dataHorarioJogo;
+    public Partida(Time mandante, Time visitante, LocalDateTime dataHoraInicio) {
+        this.mandante = mandante;
+        this.visitante = visitante;
+        this.dataHoraInicio = dataHoraInicio;
+        this.finalizada = false;
     }
 
-    public String getClubeMandante() {
-        return clubeMandante;
+    public void finalizarPartida(int golsMandante, int golsVisitante) {
+        if (golsMandante < 0 || golsVisitante < 0) throw new IllegalArgumentException("Placar inválido.");
+        this.golsMandante = golsMandante;
+        this.golsVisitante = golsVisitante;
+        this.finalizada = true;
     }
 
-    public String getClubeVisitante() {
-        return clubeVisitante;
+    public boolean aceitaApostas(LocalDateTime momentoAtual) {
+
+        return momentoAtual.isBefore(dataHoraInicio.minusMinutes(20));
     }
 
-    public LocalDateTime getDataHorarioJogo() {
-        return dataHorarioJogo;
-    }
-
-    public String getDataHorarioFormatado() {
-
-        if (this.dataHorarioJogo == null) {
-            return "Data não definida";
-        }
-
-        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        return this.dataHorarioJogo.format(formatador);
-    }
-
-    public void setClubeMandante(String clubeMandante) {
-        this.clubeMandante = clubeMandante;
-    }
-
-    public void setClubeVisitante(String clubeVisitante) {
-        this.clubeVisitante = clubeVisitante;
-    }
-
-    public void setDataHorarioJogo(LocalDateTime dataHorarioJogo) {
-        this.dataHorarioJogo = dataHorarioJogo;
-    }
+    public Time getMandante() { return mandante; }
+    public Time getVisitante() { return visitante; }
+    public LocalDateTime getDataHoraInicio() { return dataHoraInicio; }
+    public int getGolsMandante() { return golsMandante; }
+    public int getGolsVisitante() { return golsVisitante; }
+    public boolean isFinalizada() { return finalizada; }
 
     @Override
     public String toString() {
-        return "Partida: " + clubeMandante + " x " + clubeVisitante +
-                " | marcada para: " + getDataHorarioFormatado();
+        return mandante.getNome() + " x " + visitante.getNome();
     }
 }

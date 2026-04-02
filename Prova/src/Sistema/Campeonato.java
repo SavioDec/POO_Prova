@@ -1,38 +1,28 @@
 package Sistema;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Campeonato {
-
+    private String nome;
+    private List<Time> clubes;
+    private List<Partida> partidas;
     private static final int MAX_CLUBES = 8;
 
-
-    private List<Time> clubes;
-
-    public Campeonato() {
+    public Campeonato(String nome) {
+        this.nome = nome;
         this.clubes = new ArrayList<>();
+        this.partidas = new ArrayList<>();
     }
 
-    public void adicionaTime(Time novoTime) {
-        if (novoTime == null) {
-            throw new IllegalArgumentException("O clube não pode ser nulo.");
-        }
-
-        if (this.clubes.contains(novoTime)) {
-            throw new IllegalArgumentException("O clube '" + novoTime.getNome() + "' já está cadastrado neste campeonato.");
-        }
-
-        if (this.clubes.size() >= MAX_CLUBES) {
-            throw new IllegalStateException("O campeonato já atingiu o limite máximo de " + MAX_CLUBES + " clubes.");
-        }
-
-        this.clubes.add(novoTime);
+    public void adicionarTime(Time time) {
+        if (clubes.size() >= MAX_CLUBES) throw new IllegalStateException("Limite de 8 clubes atingido.");
+        if (!clubes.contains(time)) clubes.add(time);
     }
 
-
-    public List<Time> getClubes() {
-        return Collections.unmodifiableList(this.clubes);
+    public void registrarPartida(Partida partida) {
+        this.partidas.add(partida);
     }
+
+    public List<Partida> getPartidas() { return partidas; }
 }

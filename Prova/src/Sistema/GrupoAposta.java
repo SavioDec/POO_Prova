@@ -1,42 +1,41 @@
 package Sistema;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GrupoAposta {
 
     private String nome;
-    private Usuario criador; // Renomeado para dar contexto ao papel do usuário
+    private Participante criador;
+    private List<Participante> participantes;
 
-    public GrupoAposta(String nome, Usuario criador) {
-        if (nome == null || nome.trim().isEmpty()) {
-            throw new IllegalArgumentException("O nome do grupo não pode ser vazio.");
-        }
-        if (criador == null) {
-            throw new IllegalArgumentException("Um grupo precisa de um usuário criador.");
-        }
+    public GrupoAposta(String nome, Participante criador) {
         this.nome = nome;
         this.criador = criador;
+        this.participantes = new ArrayList<>();
+        this.participantes.add(criador);
+    }
+
+    public void adicionarParticipante(Participante participante) {
+        if (!participantes.contains(participante)) {
+            participantes.add(participante);
+        }
+    }
+
+    public List<Participante> getParticipantes() {
+        return participantes;
     }
 
     public String getNome() {
         return nome;
     }
 
-
-    @Override
-    public boolean equals(Object o){
-        if(this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        GrupoAposta that = (GrupoAposta) o;
-        return Objects.equals(nome, that.nome);
+    public Participante getCriador() {
+        return criador;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(nome);
+    public String toString() {
+        return nome;
     }
-
-
-
-
 }
