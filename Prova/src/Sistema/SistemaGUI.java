@@ -3,6 +3,7 @@ package Sistema;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.plaf.FontUIResource;
 import java.awt.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -40,6 +41,24 @@ public class SistemaGUI extends JFrame {
     }
 
     private void aplicarCoresAltaVisibilidade() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        FontUIResource fonteGlobal = new FontUIResource("SansSerif", Font.PLAIN, 16);
+        Enumeration<Object> keys = UIManager.getDefaults().keys();
+        while (keys.hasMoreElements()) {
+            Object key = keys.nextElement();
+            Object value = UIManager.get(key);
+            if (value instanceof FontUIResource) {
+                UIManager.put(key, fonteGlobal);
+            }
+        }
+
+
         Color fundoPrimario = new Color(30, 30, 30);
         Color fundoSecundario = new Color(65, 65, 65);
         Color textoPrincipal = new Color(230, 230, 230);
@@ -53,7 +72,7 @@ public class SistemaGUI extends JFrame {
 
         UIManager.put("Button.background", destaqueBotao);
         UIManager.put("Button.foreground", Color.WHITE);
-
+        UIManager.put("Button.focus", new Color(0, 0, 0, 0));
 
         UIManager.put("TextField.background", fundoSecundario);
         UIManager.put("TextField.foreground", textoPrincipal);
@@ -70,6 +89,10 @@ public class SistemaGUI extends JFrame {
         UIManager.put("ComboBox.selectionBackground", destaqueBotao);
         UIManager.put("ComboBox.selectionForeground", Color.WHITE);
         UIManager.put("ComboBox.border", BorderFactory.createLineBorder(bordaInput));
+        UIManager.put("ComboBox.buttonBackground", fundoSecundario);
+        UIManager.put("ComboBox.buttonDarkShadow", fundoPrimario);
+        UIManager.put("ComboBox.buttonHighlight", bordaInput);
+        UIManager.put("ComboBox.buttonShadow", bordaInput);
 
         UIManager.put("List.background", fundoSecundario);
         UIManager.put("List.foreground", textoPrincipal);
@@ -80,10 +103,14 @@ public class SistemaGUI extends JFrame {
         UIManager.put("TabbedPane.background", fundoPrimario);
         UIManager.put("TabbedPane.foreground", textoPrincipal);
         UIManager.put("TabbedPane.selected", fundoSecundario);
-        UIManager.put("TabbedPane.contentAreaColor", fundoPrimario);
+        UIManager.put("TabbedPane.contentAreaColor", fundoSecundario);
+        UIManager.put("TabbedPane.darkShadow", fundoPrimario);
+        UIManager.put("TabbedPane.shadow", bordaInput);
+        UIManager.put("TabbedPane.light", bordaInput);
+        UIManager.put("TabbedPane.highlight", fundoSecundario);
+        UIManager.put("TabbedPane.focus", new Color(0, 0, 0, 0));
 
         UIManager.put("TitledBorder.titleColor", textoPrincipal);
-
 
         SwingUtilities.updateComponentTreeUI(this);
     }
@@ -115,7 +142,7 @@ public class SistemaGUI extends JFrame {
 
         txtLog = new JTextArea(10, 40);
         txtLog.setEditable(false);
-        txtLog.setFont(new Font("Monospaced", Font.PLAIN, 30));
+        txtLog.setFont(new Font("Monospaced", Font.PLAIN, 16));
         JScrollPane scrollLog = new JScrollPane(txtLog);
         scrollLog.setBorder(new TitledBorder("Log do Sistema"));
 
@@ -492,7 +519,8 @@ public class SistemaGUI extends JFrame {
 
         JTextArea txtRanking = new JTextArea(15, 50);
         txtRanking.setEditable(false);
-        txtRanking.setFont(new Font("Monospaced", Font.PLAIN, 14));
+
+        txtRanking.setFont(new Font("Monospaced", Font.PLAIN, 16));
         JScrollPane scrollRanking = new JScrollPane(txtRanking);
         scrollRanking.setBorder(new TitledBorder("Classificação"));
 
