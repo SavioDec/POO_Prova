@@ -48,7 +48,7 @@ public class SistemaGUI extends JFrame {
         }
 
 
-        FontUIResource fonteGlobal = new FontUIResource("SansSerif", Font.PLAIN, 16);
+        FontUIResource fonteGlobal = new FontUIResource("SansSerif", Font.PLAIN, 30);
         Enumeration<Object> keys = UIManager.getDefaults().keys();
         while (keys.hasMoreElements()) {
             Object key = keys.nextElement();
@@ -57,6 +57,8 @@ public class SistemaGUI extends JFrame {
                 UIManager.put(key, fonteGlobal);
             }
         }
+
+        UIManager.put("TitledBorder.font", fonteGlobal);
 
 
         Color fundoPrimario = new Color(30, 30, 30);
@@ -104,6 +106,7 @@ public class SistemaGUI extends JFrame {
         UIManager.put("TabbedPane.foreground", textoPrincipal);
         UIManager.put("TabbedPane.selected", fundoSecundario);
         UIManager.put("TabbedPane.contentAreaColor", fundoSecundario);
+
         UIManager.put("TabbedPane.darkShadow", fundoPrimario);
         UIManager.put("TabbedPane.shadow", bordaInput);
         UIManager.put("TabbedPane.light", bordaInput);
@@ -142,7 +145,7 @@ public class SistemaGUI extends JFrame {
 
         txtLog = new JTextArea(10, 40);
         txtLog.setEditable(false);
-        txtLog.setFont(new Font("Monospaced", Font.PLAIN, 16));
+        txtLog.setFont(new Font("Monospaced", Font.PLAIN, 25));
         JScrollPane scrollLog = new JScrollPane(txtLog);
         scrollLog.setBorder(new TitledBorder("Log do Sistema"));
 
@@ -520,7 +523,7 @@ public class SistemaGUI extends JFrame {
         JTextArea txtRanking = new JTextArea(15, 50);
         txtRanking.setEditable(false);
 
-        txtRanking.setFont(new Font("Monospaced", Font.PLAIN, 16));
+        txtRanking.setFont(new Font("Monospaced", Font.PLAIN, 25));
         JScrollPane scrollRanking = new JScrollPane(txtRanking);
         scrollRanking.setBorder(new TitledBorder("Classificação"));
 
