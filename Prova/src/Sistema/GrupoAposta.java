@@ -5,6 +5,7 @@ import java.util.List;
 
 public class GrupoAposta {
 
+    private int id;
     private String nome;
     private Participante criador;
     private List<Participante> participantes;
@@ -15,6 +16,9 @@ public class GrupoAposta {
         this.participantes = new ArrayList<>();
         this.participantes.add(criador);
     }
+
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
     public void adicionarParticipante(Participante participante) {
         if (!participantes.contains(participante)) {

@@ -1,34 +1,51 @@
-# POO_Prova
-Objetivo
-Implementar um software que gerencie pontos para um grupo de usuários em relação às partidas de um Campeonato de Futebol.
+# FutBet Pro ⚽
 
-Objetivos Específicos
-Aplicar os conceitos fundamentais do paradigma de programação orientado a objetos: encapsulamento, construtores (padrão e sobrecarregado), herança simples, polimorfismo (sobrecarga e sobreposição).
-Específicos (LPOO): aplicar melhores práticas de desenvolvimento, implementação adequada dos considerando os pilares de O.O., interfaces de usuário.
-Descrição do Problema
-Desenvolver um sistema para gerenciamento de apostas entre participantes de um grupo relacionado às partidas de um campeonato de futebol. Cada participante poderá registrar suas apostas sobre os resultados das partidas e receberá pontuação de acordo com a precisão de seus palpites.
-O funcionamento do sistema deve seguir as seguintes regras:
+Sistema de gerenciamento de apostas de futebol voltado para grupos de amigos, com foco em usabilidade, design moderno e acompanhamento em tempo real. Desenvolvido em Java com interface customizada (Soft Dark Theme) e persistência de dados em SQLite.
 
-Cadastro de campeonato e clubes
-O sistema deverá permitir o cadastro de campeonatos de futebol.
-Cada campeonato será composto por no máximo 8 (oito) clubes (times) participantes.
-Os clubes deverão ser cadastrados previamente no sistema.
-Cadastro de partidas
-As partidas do campeonato deverão ser registradas no sistema, informando os clubes participantes, a data e o horário da partida.
-Cadastro de grupos e participantes
-O sistema deverá permitir que um usuário crie um grupo de apostas. O sistema comporta no máximo 5 (cinco) grupos .
-Os participantes poderão se cadastrar no sistema e ingressar em um grupo. O sistema comporta no máximo 5 (cinco) participantes.
-Registro de apostas
-Cada participante poderá registrar sua aposta para as partidas do campeonato, informando o resultado esperado e o placar previsto. As apostas podem ser realizadas no máximo até 20 minutos antes da partida.
-Atualização dos resultados
-Após o término de cada partida, o administrador do sistema deverá registrar o resultado real do jogo.
+## Recursos e Funcionalidades
 
-Cálculo de pontuação
-O sistema deverá calcular automaticamente a pontuação obtida por cada participante, de acordo com as seguintes regras:
-Acertar apenas o resultado da partida (vencedor ou empate): 5 pontos.
-Acertar o resultado e o placar exato: 10 pontos.
-Definições
-Resultado da partida: identificação do vencedor do jogo ou empate.
-Placar: número de gols marcados por cada equipe na partida.
-Apresentação dos resultados
-O sistema deverá informar a pontuação obtida por cada participante e permitir a visualização da classificação dentro do grupo.
+O FutBet Pro oferece as seguintes funcionalidades principais:
+
+*   **Sistema de Acesso (Login/Cadastro):** Diferenciação entre perfis de Administradores (gerenciamento) e Participantes (apostas).
+*   **Gestão de Times e Partidas (Admin):** O administrador cadastra as equipes, agenda os confrontos (com data e hora precisas) e lança os resultados (placares finais). Possui um recurso para gerar resultados aleatórios para facilitar testes e simulações.
+*   **Dashboard e Notificações:** Tela inicial com resumo de performance (pontos e apostas), agenda dos próximos jogos e relógio integrado. Todas as ações do sistema possuem feedback visual instantâneo (toasts).
+*   **Gestão de Apostas:** Os participantes registram seus palpites para cada partida, informando os gols do mandante e visitante. As apostas são permitidas até o exato momento de início do jogo.
+*   **Grupos de Apostas:** Os usuários criam e ingressam em grupos fechados para competir com amigos específicos.
+*   **Rankings Duplos e Dinâmicos:** A aba de classificação exibe, lado a lado, o Ranking Global (todos os participantes do sistema) e o Ranking do Grupo selecionado. As tabelas são atualizadas automaticamente.
+*   **Sistema de Pontuação:**
+    *   Acertar o resultado (vencedor ou empate) e o placar exato: **10 pontos**.
+    *   Acertar apenas a tendência do resultado (quem ganhou ou se empatou), mas errar o placar exato: **5 pontos**.
+    *   Errar ambos: **0 pontos**.
+
+## Arquitetura e Interface
+
+*   **Padrão MVC e DAO:** Lógica de negócios isolada da interface e da persistência de dados.
+*   **Banco de Dados:** Utiliza SQLite nativo com o driver JDBC (`sqlite-jdbc`).
+*   **Design System:** Interface construída inteiramente do zero usando a API `Graphics2D` do Java Swing. O sistema adota um "Soft Dark Theme" responsivo, com suporte a inputs de teclado (Enter), separação visual via paleta de cores (Slate/Azul) e ausência de bibliotecas gráficas externas pesadas.
+
+## Como Executar
+
+### Pré-requisitos
+*   Java Development Kit (JDK) 25 ou superior.
+*   Drivers localizados na pasta `/lib` (`sqlite-jdbc.jar`, `slf4j-api.jar`, `slf4j-simple.jar`).
+
+### Compilação e Execução
+Utilize o terminal/prompt de comando na raiz do projeto:
+
+```bash
+# Compilar o código
+javac --release 25 -cp "lib/*" Prova/src/Main.java Prova/src/Sistema/*.java Prova/src/Sistema/UI/*.java Prova/src/Sistema/DAO/*.java Prova/src/Sistema/Database/*.java -d out/production/Prova
+
+# Executar a aplicação
+java -classpath out/production/Prova:lib/* Main
+```
+
+## Estrutura do Banco de Dados
+O banco de dados SQLite (`banco.db`) é gerado automaticamente na primeira execução, estruturado nas seguintes tabelas:
+- `usuarios`: Armazena participantes e administradores.
+- `times`: Catálogo de equipes.
+- `partidas`: Registra confrontos, datas e status (finalizada ou pendente).
+- `apostas`: Palpites dos usuários atrelados às partidas.
+- `grupos`: Registros de ligas fechadas.
+- `usuarios_grupos`: Tabela de associação (N:M) entre participantes e grupos.
+- `logs`: Registro de eventos críticos do sistema.

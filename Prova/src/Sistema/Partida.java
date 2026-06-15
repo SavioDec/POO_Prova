@@ -3,6 +3,7 @@ package Sistema;
 import java.time.LocalDateTime;
 
 public class Partida {
+    private int id;
     private Time mandante;
     private Time visitante;
     private LocalDateTime dataHoraInicio;
@@ -17,6 +18,9 @@ public class Partida {
         this.finalizada = false;
     }
 
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+
     public void finalizarPartida(int golsMandante, int golsVisitante) {
         if (golsMandante < 0 || golsVisitante < 0) throw new IllegalArgumentException("Placar inválido.");
         this.golsMandante = golsMandante;
@@ -25,8 +29,7 @@ public class Partida {
     }
 
     public boolean aceitaApostas(LocalDateTime momentoAtual) {
-
-        return momentoAtual.isBefore(dataHoraInicio.minusMinutes(20));
+        return momentoAtual.isBefore(dataHoraInicio);
     }
 
     public Time getMandante() { return mandante; }

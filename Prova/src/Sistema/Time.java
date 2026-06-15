@@ -1,6 +1,7 @@
 package Sistema;
 
 public class Time {
+    private int id;
     private String nome;
 
     public Time(String nome) {
@@ -8,6 +9,8 @@ public class Time {
         this.nome = nome;
     }
 
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
     public String getNome() { return nome; }
 
     @Override
