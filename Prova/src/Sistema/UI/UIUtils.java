@@ -170,7 +170,7 @@ public class UIUtils {
             }
         };
         panel.setOpaque(false);
-        JLabel lbl = new JLabel("✕ " + message);
+        JLabel lbl = new JLabel("Erro: " + message);
         lbl.setFont(new Font("Inter", Font.BOLD, 14));
         lbl.setForeground(Color.WHITE);
         panel.add(lbl);

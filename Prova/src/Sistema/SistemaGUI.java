@@ -91,11 +91,11 @@ public class SistemaGUI extends JFrame {
         JPanel mainContent = new JPanel(cardLayout);
         mainContent.setOpaque(false);
 
-        addNavButton(sidebar, "🏠 Dashboard", "home", mainContent, cardLayout);
-        addNavButton(sidebar, "📅 Partidas", "games", mainContent, cardLayout);
-        addNavButton(sidebar, "✍️ Apostar", "bet", mainContent, cardLayout);
-        addNavButton(sidebar, "👥 Grupos", "groups", mainContent, cardLayout);
-        addNavButton(sidebar, "🏆 Ranking", "rank", mainContent, cardLayout);
+        addNavButton(sidebar, "Dashboard", "home", mainContent, cardLayout);
+        addNavButton(sidebar, "Partidas", "games", mainContent, cardLayout);
+        addNavButton(sidebar, "Apostar", "bet", mainContent, cardLayout);
+        addNavButton(sidebar, "Grupos", "groups", mainContent, cardLayout);
+        addNavButton(sidebar, "Ranking", "rank", mainContent, cardLayout);
 
         if (user instanceof Administrador) {
             sidebar.add(Box.createVerticalStrut(20));
@@ -165,7 +165,7 @@ public class SistemaGUI extends JFrame {
         
         JPanel welcome = new JPanel(new BorderLayout());
         welcome.setOpaque(false);
-        welcome.add(UIUtils.createLabel("Bom dia, " + user.getNome() + " ✨", 26, true), BorderLayout.NORTH);
+        welcome.add(UIUtils.createLabel("Bom dia, " + user.getNome(), 26, true), BorderLayout.NORTH);
         welcome.add(UIUtils.createLabel("Acompanhe suas estatísticas e próximas partidas.", 14, false), BorderLayout.CENTER);
         
         JPanel grid = new JPanel(new GridLayout(1, 2, 30, 0));
@@ -403,7 +403,7 @@ public class SistemaGUI extends JFrame {
         // --- RANKING GLOBAL ---
         JPanel cardGlobal = UIUtils.createCard();
         cardGlobal.setLayout(new BorderLayout(0, 15));
-        cardGlobal.add(UIUtils.createLabel("🏆 RANKING GLOBAL INDIVIDUAL", 12, true), BorderLayout.NORTH);
+        cardGlobal.add(UIUtils.createLabel("RANKING GLOBAL INDIVIDUAL", 12, true), BorderLayout.NORTH);
         
         DefaultListModel<String> mGlobal = new DefaultListModel<>();
         JList<String> listGlobal = new JList<>(mGlobal);
@@ -725,7 +725,7 @@ public class SistemaGUI extends JFrame {
             c.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, UIUtils.BORDER));
             
             String status = v.isFinalizada() ? String.format("   %d x %d ", v.getGolsMandante(), v.getGolsVisitante()) : "   vs   ";
-            JLabel info = new JLabel("  ⚽ " + v.getMandante().getNome() + status + v.getVisitante().getNome());
+            JLabel info = new JLabel("   " + v.getMandante().getNome() + status + v.getVisitante().getNome());
             info.setFont(new Font("Inter", s ? Font.BOLD : Font.PLAIN, 14));
             info.setForeground(UIUtils.TEXT);
             

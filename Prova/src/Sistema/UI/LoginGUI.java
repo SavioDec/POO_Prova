@@ -34,7 +34,7 @@ public class LoginGUI extends JFrame {
         g.gridx = 0; g.weightx = 1.0;
 
         // Logo
-        JLabel logo = UIUtils.createLabel("⚽ FUTBET PRO", 28, true);
+        JLabel logo = UIUtils.createLabel("FUTBET PRO", 28, true);
         logo.setForeground(UIUtils.ACCENT);
         logo.setHorizontalAlignment(SwingConstants.CENTER);
         g.gridy = 0; g.insets = new Insets(0, 0, 40, 0);
